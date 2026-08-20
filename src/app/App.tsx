@@ -11,6 +11,7 @@ import MentorStudents from "../features/mentorship/MentorStudents";
 import StudentMentors from "../features/mentorship/StudentMentors";
 import Catalogue from "../features/learning/Catalogue";
 import CourseView from "../features/learning/CourseView";
+import GamificationPage from "../features/learning/Gamification";
 
 export default function App() {
   return (
@@ -21,15 +22,17 @@ export default function App() {
 
       {/* Main Application (Wrapped in AppLayout so the Sidebar shows) */}
       <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
-        <Route path="/mentor/dashboard" element={<MentorDashboard />} />
-        <Route path="/mentor/courses" element={<MentorCourses />} />
-        <Route path="/mentor/courses/new" element={<CourseBuilder />} />
-        <Route path="/mentor/students" element={<MentorStudents />} />
+        <Route path="/mentor/dashboard" element={<ProtectedRoute allowedRoles={["mentor"]}><MentorDashboard /></ProtectedRoute>} />
+        <Route path="/mentor/courses" element={<ProtectedRoute allowedRoles={["mentor"]}><MentorCourses /></ProtectedRoute>} />
+        <Route path="/mentor/courses/new" element={<ProtectedRoute allowedRoles={["mentor"]}><CourseBuilder /></ProtectedRoute>} />
+        <Route path="/mentor/courses/:courseId" element={<ProtectedRoute allowedRoles={["mentor"]}><CourseBuilder /></ProtectedRoute>} />
+        <Route path="/mentor/students" element={<ProtectedRoute allowedRoles={["mentor"]}><MentorStudents /></ProtectedRoute>} />
 
-        <Route path="/student/dashboard" element={<StudentDashboard />} />
-        <Route path="/student/mentors" element={<StudentMentors />} />
-        <Route path="/catalogue" element={<Catalogue />} />
-        <Route path="/student/courses/:courseId" element={<CourseView />} />
+        <Route path="/student/dashboard" element={<ProtectedRoute allowedRoles={["student"]}><StudentDashboard /></ProtectedRoute>} />
+        <Route path="/student/mentors" element={<ProtectedRoute allowedRoles={["student"]}><StudentMentors /></ProtectedRoute>} />
+        <Route path="/catalogue" element={<ProtectedRoute allowedRoles={["student"]}><Catalogue /></ProtectedRoute>} />
+        <Route path="/student/courses/:courseId" element={<ProtectedRoute allowedRoles={["student"]}><CourseView /></ProtectedRoute>} />
+        <Route path="/student/gamification" element={<ProtectedRoute allowedRoles={["student"]}><GamificationPage /></ProtectedRoute>} />
       </Route>
 
       {/* Catch-all redirect */}

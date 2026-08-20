@@ -5,6 +5,9 @@ import type { ReactNode } from "react";
 export default function ProtectedRoute({children,allowedRoles}:{children:ReactNode;allowedRoles?:UserRole[]}){
   const { user } = useAuth();
   if(!user) return <Navigate to="/login" replace/>;
-  if(allowedRoles && !allowedRoles.includes(user.role)) return <Navigate to={user.role==="mentor"?"/mentor":"/student"} replace/>;
+  if(allowedRoles && !allowedRoles.includes(user.role)) {
+    const home = user.role === "mentor" ? "/mentor/dashboard" : user.role === "student" ? "/student/dashboard" : "/login";
+    return <Navigate to={home} replace/>;
+  }
   return <>{children}</>;
 }

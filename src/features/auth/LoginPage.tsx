@@ -36,7 +36,7 @@ export default function LoginPage() {
         </div>
         <div>
           <h2 className="font-display text-3xl font-bold leading-tight">
-            Proactive support,
+            Catch students early,
             <br />
             before students fall behind.
           </h2>
