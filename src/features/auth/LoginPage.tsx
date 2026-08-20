@@ -18,7 +18,7 @@ export default function LoginPage() {
     setBusy(true);
     try {
       const user = await login(email, password);
-      nav(user.role === "mentor" ? "/mentor/dashboard" : "/student/dashboard");
+      nav(user.role === "admin" ? "/admin" : user.role === "mentor" ? "/mentor/dashboard" : "/student/dashboard");
     } catch (x) {
       setErr(x instanceof ApiError ? x.message : "Login failed");
     } finally {

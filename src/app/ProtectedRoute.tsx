@@ -6,7 +6,7 @@ export default function ProtectedRoute({children,allowedRoles}:{children:ReactNo
   const { user } = useAuth();
   if(!user) return <Navigate to="/login" replace/>;
   if(allowedRoles && !allowedRoles.includes(user.role)) {
-    const home = user.role === "mentor" ? "/mentor/dashboard" : user.role === "student" ? "/student/dashboard" : "/login";
+    const home = user.role === "admin" ? "/admin" : user.role === "mentor" ? "/mentor/dashboard" : "/student/dashboard";
     return <Navigate to={home} replace/>;
   }
   return <>{children}</>;

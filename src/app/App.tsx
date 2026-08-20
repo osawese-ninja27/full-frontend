@@ -12,6 +12,7 @@ import StudentMentors from "../features/mentorship/StudentMentors";
 import Catalogue from "../features/learning/Catalogue";
 import CourseView from "../features/learning/CourseView";
 import GamificationPage from "../features/learning/Gamification";
+import AdminDashboard from "../features/dashboard/AdminDashboard";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
 
       {/* Main Application (Wrapped in AppLayout so the Sidebar shows) */}
       <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
+        <Route path="/admin" element={<ProtectedRoute allowedRoles={["admin"]}><AdminDashboard /></ProtectedRoute>} />
         <Route path="/mentor/dashboard" element={<ProtectedRoute allowedRoles={["mentor"]}><MentorDashboard /></ProtectedRoute>} />
         <Route path="/mentor/courses" element={<ProtectedRoute allowedRoles={["mentor"]}><MentorCourses /></ProtectedRoute>} />
         <Route path="/mentor/courses/new" element={<ProtectedRoute allowedRoles={["mentor"]}><CourseBuilder /></ProtectedRoute>} />

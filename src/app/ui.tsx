@@ -8,8 +8,11 @@ export function Navbar() {
   const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
   const isMentor = user?.role === "mentor";
+  const isAdmin = user?.role === "admin";
 
-  const links = isMentor
+  const links = isAdmin
+    ? [{ to: "/admin", label: "Admin" }]
+    : isMentor
     ? [
         { to: "/mentor/dashboard", label: "Dashboard" },
         { to: "/mentor/courses", label: "My Courses" },
@@ -33,7 +36,7 @@ export function Navbar() {
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         {/* Brand */}
-        <Link to={isMentor ? "/mentor/dashboard" : "/student/dashboard"} className="flex items-center gap-2 shrink-0">
+        <Link to={isAdmin ? "/admin" : isMentor ? "/mentor/dashboard" : "/student/dashboard"} className="flex items-center gap-2 shrink-0">
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 font-display text-sm font-bold text-white">
             MB
           </span>
