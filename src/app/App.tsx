@@ -10,6 +10,7 @@ import CourseBuilder from "../features/courses/CourseBuilder";
 import MentorStudents from "../features/mentorship/MentorStudents";
 import StudentMentors from "../features/mentorship/StudentMentors";
 import Catalogue from "../features/learning/Catalogue";
+import CourseView from "../features/learning/CourseView";
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/student/dashboard" element={<StudentDashboard />} />
         <Route path="/student/mentors" element={<StudentMentors />} />
         <Route path="/catalogue" element={<Catalogue />} />
+        <Route path="/student/courses/:courseId" element={<CourseView />} />
       </Route>
 
       {/* Catch-all redirect */}
